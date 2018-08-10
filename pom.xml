@@ -35,6 +35,11 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-gcp-starter</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>io.projectriff</groupId>
+			<artifactId>java-function-invoker</artifactId>
+			<version>0.0.8-SNAPSHOT</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -67,6 +72,28 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>0.9.8</version>
+				<configuration>
+					<to>
+						<image>saturnism/demo</image>
+					</to>
+					<container>
+						<jvmFlags>
+							<jvmFlag>-Xms128m</jvmFlag>
+							<jvmFlag>-Djava.security.egd=file:/dev/./urandom</jvmFlag>
+							<jvmFlag>-XX:TieredStopAtLevel=1</jvmFlag>
+							<jvmFlag>-noverify</jvmFlag>
+						</jvmFlags>
+						<mainClass>io.projectriff.invoker.JavaFunctionInvokerApplication</mainClass>
+						<args>
+							<arg>--function.uri=file:app/classes?handler=com.example.cat.HelloFunction</arg>
+						</args>
+					</container>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
