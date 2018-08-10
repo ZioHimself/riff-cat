@@ -35,6 +35,7 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-gcp-starter</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>io.projectriff</groupId>
 			<artifactId>java-function-invoker</artifactId>
@@ -72,6 +73,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>io.projectriff.invoker.JavaFunctionInvokerApplication</mainClass>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>com.google.cloud.tools</groupId>
@@ -90,7 +94,9 @@
 						</jvmFlags>
 						<mainClass>io.projectriff.invoker.JavaFunctionInvokerApplication</mainClass>
 						<args>
-							<arg>--function.uri=file:app/classes?handler=com.example.cat.HelloFunction</arg>
+							<!--arg>..function.uri=file:app/classes?handler=com.example.cat.HelloFunction</arg-->
+							<arg>--function.location=file:app/classes</arg>
+							<arg>--function.bean=com.example.cat.HelloFunction</arg>
 						</args>
 					</container>
 				</configuration>
