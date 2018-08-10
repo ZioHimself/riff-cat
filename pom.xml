@@ -79,7 +79,7 @@
 				<version>0.9.8</version>
 				<configuration>
 					<to>
-						<image>saturnism/demo</image>
+						<image>saturnism/riff-cat</image>
 					</to>
 					<container>
 						<jvmFlags>
