@@ -1,9 +1,18 @@
 package com.example.cat;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
 import java.util.function.Function;
 
-public class HelloFunction implements Function<String, String> {
-	@Override public String apply(String s) {
-		return "Hello " + s;
+@SpringBootApplication
+public class HelloFunction {
+	@Bean Function<String, String> hello() {
+		return (in) -> { return "Hello " + in; };
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(HelloFunction.class, args);
 	}
 }
