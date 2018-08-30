@@ -1,0 +1,26 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: riff-cat-knative
+  namespace: default
+  labels:
+    domain: nip
+spec:
+  runLatest:
+    configuration:
+      build:
+        serviceAccountName: riff-build
+        source:
+          git:
+            url: https://github.com/saturnism/riff-cat.git
+            revision: master
+        template:
+          name: jib-maven
+          arguments:
+          - name: IMAGE
+            value: &image gcr.io/wise-coyote-827/riff-cat
+      revisionTemplate:
+        spec:
+          container:
+            image: *image
+
